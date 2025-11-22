@@ -15,7 +15,7 @@ const Playlist = () => {
   const [selectedMusics, setSelectedMusics] = useState([]);
   const [playlistTitle, setPlaylistTitle] = useState("");
   const [loading, setLoading] = useState(true);
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
 
   useEffect(() => {
     axios

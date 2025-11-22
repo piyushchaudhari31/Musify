@@ -19,7 +19,7 @@ export default function UploadMusic() {
     const [ musicDuration, setMusicDuration ] = useState(null)
     const audioRef = useRef(null)
 
-    const url = "http://localhost:3000"
+    const url = "https://musify-mxwi.onrender.com"
 
     useEffect(() => {
         if (form.coverImage) {

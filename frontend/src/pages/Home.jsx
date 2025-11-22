@@ -11,7 +11,7 @@ export default function Home({ socket }) {
 
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
-  const url = 'http://localhost:3000'
+  const url = 'https://musify-mxwi.onrender.com'
 
   useEffect(() => {
     axios.get(`${url}/api/auth/check-auth`, { withCredentials: true })

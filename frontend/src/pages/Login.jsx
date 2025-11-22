@@ -18,7 +18,7 @@ function Login() {
     setLoginData({ ...loginData, [name]: value });
     
   };
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
 
   const handleSubmit = async(e) => {
     e.preventDefault();

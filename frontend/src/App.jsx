@@ -15,7 +15,7 @@ import Playlistcard from './pages/component/Playlistcard'
 function App() {
 
   const [ socket, setSocket ] = useState(null)
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
 
   useEffect(() => {
 

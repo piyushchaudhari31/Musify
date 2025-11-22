@@ -8,7 +8,7 @@ export default function MusicPlayer() {
   const navigate = useNavigate()
   const [track, setTrack] = useState(null)
 
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
 
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)

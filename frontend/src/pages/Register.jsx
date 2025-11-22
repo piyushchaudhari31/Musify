@@ -19,7 +19,7 @@ function Register() {
     role: "user",
   });
 
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
   const handleChange = (e) => {
     const { name, value } = e.target;
 

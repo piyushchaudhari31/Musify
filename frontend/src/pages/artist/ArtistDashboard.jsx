@@ -11,7 +11,7 @@ export default function ArtistDashboard() {
   const [user, setUser] = useState(null)
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
-  const url = "http://localhost:3000"
+  const url = "https://musify-mxwi.onrender.com"
 
   const formatDateTime = (d) => {
     return new Date(d).toLocaleString([], {
