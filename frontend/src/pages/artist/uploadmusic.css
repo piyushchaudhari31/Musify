@@ -1,0 +1,158 @@
+.upload-music-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0f1115, #181a1f 80%);
+  color: #ffffff;
+  padding: 2rem;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.upload-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.upload-sub {
+  color: #a1a1a1;
+  font-size: 1rem;
+}
+
+.upload-form {
+  background: #20232b;
+  border-radius: 14px;
+  padding: 2rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  border: 1px solid #2a2e36;
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.form-grid {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.field-group label {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.field-group input[type="text"],
+.field-group input[type="file"] {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  border: 1px solid #2a2e36;
+  background: #181a1f;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.field-group input[type="text"]:focus {
+  outline: none;
+  background: #1a1e24;
+}
+
+.file-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.file-meta {
+  font-size: 0.9rem;
+  color: #a1a1a1;
+  word-break: break-all;
+}
+
+.btn {
+  border: none;
+  border-radius: 14px;
+  font-weight: 600;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.25s ease;
+}
+
+.btn-primary {
+  background: #1db954;
+  color: #000;
+  box-shadow: 0 0 14px rgba(29, 185, 84, 0.4);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 0 20px rgba(29, 185, 84, 0.6);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .upload-title {
+    font-size: 1.6rem;
+  }
+
+  .upload-form {
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+@media (max-width: 480px) {
+  .upload-music-page {
+    padding: 1rem;
+  }
+
+  .upload-title {
+    font-size: 1.4rem;
+  }
+
+  .field-group input[type="text"],
+  .field-group input[type="file"] {
+    font-size: 0.95rem;
+    padding: 0.65rem 0.9rem;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 0.8rem;
+  }
+
+  .file-meta {
+    font-size: 0.8rem;
+  }
+}
