@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { publishTOQueue } = require('../broker/rabbit')
 
-const url = "http://localhost:5173"
+const url = "https://musify-song.onrender.com"
 
 
 async function userRegister(req, res) {
