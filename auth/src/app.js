@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth.routes');
 const musicRoutes = require('./routes/music.routes');
 
 const app = express();
-const url = "https://musify-mxwi.onrender.com"
+
 
 // Middleware setup
 app.use(passport.initialize());
@@ -28,7 +28,7 @@ app.use(cors({
 passport.use(new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: `${url}/api/auth/google/callback`,
+  callbackURL: `${process.env.BACKEND_URL}/api/auth/google/callback`,
 }, (accessToken, refreshToken, profile, done) => {
   // Here, you would typically find or create a user in your database
   // For this example, we'll just return the profile
