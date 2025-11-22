@@ -11,7 +11,7 @@ export default function Home({ socket }) {
 
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
-  const url = 'https://musify-mxwi.onrender.com'
+  const url = 'http://localhost:3000'
 
   useEffect(() => {
     axios.get(`${url}/api/auth/check-auth`, { withCredentials: true })
@@ -122,7 +122,7 @@ export default function Home({ socket }) {
                   tabIndex={0}
                   onClick={() => {
                     socket?.emit("play", { musicId: m.id })
-                    navigate(`/music/${m.id}`)
+                    navigate(`/music/${m.id}`,{state:{musics}})
                   }}
                 >
                   <div className="music-cover-wrapping">

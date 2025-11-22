@@ -1,14 +1,19 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import '../music/musicplayer.css'
 import axios from 'axios'
 
 export default function MusicPlayer() {
   const { id } = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+
+  
+  const musicList = location.state?.musics || []
+
   const [track, setTrack] = useState(null)
 
-  const url = "https://musify-mxwi.onrender.com"
+  const url = "http://localhost:3000"
 
   const audioRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
@@ -17,7 +22,6 @@ export default function MusicPlayer() {
   const [volume, setVolume] = useState(0.8)
   const [playbackRate, setPlaybackRate] = useState(1)
 
-  // Format time like 3:09
   const formatTime = useCallback((s) => {
     if (!Number.isFinite(s)) return '0:00'
     const mins = Math.floor(s / 60)
@@ -25,13 +29,11 @@ export default function MusicPlayer() {
     return `${mins}:${secs}`
   }, [])
 
-  // When metadata loads
   const handleLoadedMetadata = () => {
     const d = audioRef.current?.duration
     if (d) setDuration(d)
   }
 
-  // ✅ Play / Pause toggle
   const togglePlay = async () => {
     const audio = audioRef.current
     if (!audio) return
@@ -49,12 +51,10 @@ export default function MusicPlayer() {
     }
   }
 
-  // ✅ Update progress bar
   const handleTimeUpdate = () => {
     if (audioRef.current) setCurrentTime(audioRef.current.currentTime)
   }
 
-  // ✅ Seek manually
   const handleProgressChange = (e) => {
     const time = Number(e.target.value)
     if (audioRef.current) {
@@ -63,52 +63,79 @@ export default function MusicPlayer() {
     }
   }
 
-  // ✅ Control volume
   const handleVolumeChange = (e) => {
     const val = Number(e.target.value)
     setVolume(val)
     if (audioRef.current) audioRef.current.volume = val
   }
 
-  // ✅ Control speed
   const handleRateChange = (e) => {
     const val = Number(e.target.value)
     setPlaybackRate(val)
     if (audioRef.current) audioRef.current.playbackRate = val
   }
 
-  // ✅ Skip forward / backward
-  const skip = (delta) => {
-    if (!audioRef.current) return
-    let newTime = Math.min(Math.max(0, audioRef.current.currentTime + delta), duration)
-    audioRef.current.currentTime = newTime
-    setCurrentTime(newTime)
+  const currentIndex = musicList.findIndex(m => m.id === id)
+
+  const playNext = () => {
+    if (currentIndex < musicList.length - 1) {
+      const nextId = musicList[currentIndex + 1].id
+      navigate(`/music/${nextId}`, { state: { musics: musicList } })
+    }
   }
 
-  // Load track data
+  const playPrev = () => {
+    if (currentIndex > 0) {
+      const prevId = musicList[currentIndex - 1].id
+      navigate(`/music/${prevId}`, { state: { musics: musicList } })
+    }
+  }
+
+  
   useEffect(() => {
     axios
       .get(`${url}/api/music/get-detail/${id}`, { withCredentials: true })
       .then(res => {
         setTrack(res.data.music)
+        setIsPlaying(false)
+        setCurrentTime(0)
       })
       .catch(err => console.error(err))
   }, [id])
 
-  // Apply volume/speed when changed
+  
   useEffect(() => {
     if (audioRef.current) audioRef.current.volume = volume
   }, [volume])
+
   useEffect(() => {
     if (audioRef.current) audioRef.current.playbackRate = playbackRate
   }, [playbackRate])
+
+  
+  useEffect(() => {
+    if (audioRef.current) {
+      const autoPlay = async () => {
+        try {
+          await audioRef.current.play()
+          setIsPlaying(true)
+        } catch (err) {
+          console.log("Autoplay blocked:", err)
+        }
+      }
+      autoPlay()
+    }
+  }, [track]) 
 
   if (!track) return <div className="loading">Loading...</div>
 
   return (
     <div className="music-player-page">
       <header className="player-header">
-        <button className="btn btn-small" onClick={() => navigate(-1)}>← Back</button>
+
+       
+        <button className="btn btn-small" onClick={() => navigate('/')}>← Back</button>
+
         <h1 className="player-title">{track.title}</h1>
       </header>
 
@@ -133,12 +160,13 @@ export default function MusicPlayer() {
             preload="metadata"
             onLoadedMetadata={handleLoadedMetadata}
             onTimeUpdate={handleTimeUpdate}
-            onEnded={() => setIsPlaying(false)}
+            onEnded={playNext}   
           />
 
           <div className="transport">
             <div className="time-row">
               <span>{formatTime(currentTime)}</span>
+
               <input
                 type="range"
                 min={0}
@@ -148,15 +176,34 @@ export default function MusicPlayer() {
                 onChange={handleProgressChange}
                 className="progress-bar"
               />
+
               <span>{formatTime(duration)}</span>
             </div>
 
             <div className="buttons-row">
-              <button className="btn btn-small" onClick={() => skip(-10)}>⏪ -10s</button>
+
+              
+              <button
+                className="btn btn-small"
+                onClick={playPrev}
+                disabled={currentIndex === 0}
+              >
+                ⏮ Prev
+              </button>
+
               <button className="btn btn-primary play-btn" onClick={togglePlay}>
                 {isPlaying ? '⏸ Pause' : '▶️ Play'}
               </button>
-              <button className="btn btn-small" onClick={() => skip(10)}>+10s ⏩</button>
+
+              
+              <button
+                className="btn btn-small"
+                onClick={playNext}
+                disabled={currentIndex === musicList.length - 1}
+              >
+                Next ⏭
+              </button>
+
             </div>
           </div>
 

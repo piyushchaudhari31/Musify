@@ -1,13 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../component/playlistcard.css'; // ✅ import CSS file
+import '../component/playlistcard.css'; 
 
 const Playlistcard = () => {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
   const [musics, setMusics] = useState([]);
-  const url = "https://musify-mxwi.onrender.com"
+  const url = "http://localhost:3000"
   const navigate = useNavigate()
   
   async function getPlaylist() {
@@ -19,7 +19,7 @@ const Playlistcard = () => {
       
       setPlaylist(data);
 
-      // Fetch music details for each music ID
+      
       if (data.musics && data.musics.length > 0) {
         const musicDetails = await Promise.all(
           data.musics.map(async (musicId) => {
@@ -41,7 +41,9 @@ const Playlistcard = () => {
   }, [id]);
 
   const GetMusicid = (musicId)=>{
-    navigate(`/music/${musicId}`)
+    navigate(`/music/${musicId}`, { 
+    state: { musics: musics.map(m => ({ id: m._id })) } 
+  })
     
     
   }
