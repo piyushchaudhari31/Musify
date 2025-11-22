@@ -8,7 +8,6 @@ app.get("/", (req, res) => {
     res.send("Listener service is running...");
 });
 
-// Start listener + dummy server
 async function start() {
     await connect();
     startListner();
