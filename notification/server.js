@@ -4,7 +4,6 @@ import startListner from "./src/broker/listner.js";
 
 const app = express();
 
-// Dummy route (to keep Render web service alive)
 app.get("/", (req, res) => {
     res.send("Listener service is running...");
 });
