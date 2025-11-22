@@ -1,5 +1,5 @@
-import {subscribeTOQueue} from "./rabbit.js";
-import sendEmail from '../utils/email.js'
+import {subscribeTOQueue} from "../../src/broker/rabbit.js";
+import sendEmail from '../../src/utils/email.js'
 function startListner() {
     subscribeTOQueue("user Created", async(msg) => {
 
