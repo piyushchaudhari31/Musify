@@ -9,14 +9,12 @@ app.get("/", (req, res) => {
 });
 
 async function start() {
-    await connect();
-    startListner();
+    await connect();       // Connect RabbitMQ
+    startListner();        // Start queue listener
     console.log("RabbitMQ Listener Started!");
 
     const PORT = process.env.PORT || 10000;
-    app.listen(PORT, () => {
-        console.log("Dummy server running on PORT", PORT);
-    });
+    app.listen(PORT, () => console.log("Dummy server running on", PORT));
 }
 
 start();

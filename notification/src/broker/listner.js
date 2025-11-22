@@ -1,11 +1,11 @@
-import {subscribeTOQueue} from "../../src/broker/rabbit.js";
-import sendEmail from '../../src/utils/email.js'
+import { subscribeTOQueue } from "../broker/rabbit.js";
+import sendEmail from "../utils/email.js";
+
 function startListner() {
-    subscribeTOQueue("user Created", async(msg) => {
+  subscribeTOQueue("user Created", async (msg) => {
+    const { email, role, fullName: { firstName, lastName } } = msg;
 
-        const { email, role, fullName: { firstName, lastName } } = msg
-
-        const template = `
+    const template = `
         <h3>Musify Notification</h3>
     <p>Hello <b>${firstName}</b> <b>${lastName}</b></p>
     <p>We’re excited to have you as part of <b>Musify</b>!</p>
@@ -18,12 +18,17 @@ function startListner() {
     </p>
 
     <p>Thank you for being with us,<br>
-    — The Musify Team</p>`
+    — The Musify Team</p>`;
 
-    await sendEmail(email,"welcome to Musify","thank You for register with the Mudify",template)
-    })
-
-    
+    await sendEmail(
+      email,
+      "Welcome to Musify",
+      "You have successfully registered.",
+      template
+    );
+  });
 }
 
-export default startListner
+export default startListner;
+
+
