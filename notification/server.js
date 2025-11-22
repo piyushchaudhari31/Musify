@@ -1,5 +1,5 @@
 import express from "express";
-import { connect } from "./rabbit.js";
+import { connect } from "./src/broker/rabbit.js";
 import startListner from "./startListener.js";
 
 const app = express();
