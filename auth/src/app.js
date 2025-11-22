@@ -16,9 +16,13 @@ app.use(passport.initialize());
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: "*",
+  origin: [
+    "http://localhost:5173",
+    "https://musify-song.onrender.com"
+  ],
   credentials: true
 }));
+
 
 // Google OAuth setup
 passport.use(new GoogleStrategy({
