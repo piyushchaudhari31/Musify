@@ -1,40 +1,25 @@
-import config from '../../src/config/config.js'
-import nodemailer from 'nodemailer'
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    type: 'OAuth2',
-    user:config.EMAIL_USER,  
-    clientId: config.GOOGLE_CLIENT_ID,
-    clientSecret:config.GOOGLE_CLIENT_SECRET,
-    refreshToken: config.REFRESH_TOKEN,
-  },
-}); 
-
-transporter.verify((error, success) => {
-  if (error) {
-    console.error('Error connecting to email server:', error);
-  } else {
-    console.log('Email server is ready to send messages');
-  }
-});  
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 const sendEmail = async (to, subject, text, html) => {
-  try {
-    const info = await transporter.sendMail({
-      from: `"Musify" <${config.EMAIL_USER}>`, // sender address
-      to, // list of receivers
-      subject, // Subject line
-      text, // plain text body
-      html, // html body
-    }); 
+    try {
+        const { data, error } = await resend.emails.send({
+            from: "Musify <no-reply@musify.app>",
+            to,
+            subject,
+            html,
+            text,
+        });
 
-    console.log('Message sent: %s', info.messageId);
-    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-  } catch (error) {
-    console.error('Error sending email:', error.message);
-  }
+        if (error) {
+            console.error("❌ Resend Email Error:", error);
+        } else {
+            console.log("✅ Resend Email Sent:", data);
+        }
+    } catch (err) {
+        console.error("🚨 Unexpected error sending email:", err);
+    }
 };
 
-export default sendEmail
+export default sendEmail;
