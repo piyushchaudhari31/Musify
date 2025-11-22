@@ -1,6 +1,6 @@
 import express from "express";
 import { connect } from "./src/broker/rabbit.js";
-import startListner from "./startListener.js";
+import startListner from "./src/broker/listner.js";
 
 const app = express();
 
