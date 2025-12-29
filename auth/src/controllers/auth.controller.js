@@ -44,7 +44,7 @@ async function userRegister(req, res) {
 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'none',
         });
 
@@ -89,7 +89,7 @@ async function googleAuth(req, res) {
 
             res.cookie('token', token, {
                 httpOnly: true,
-                secure: false,
+                secure: true,
                 sameSite: 'none',
             });
 
@@ -125,7 +125,7 @@ async function googleAuth(req, res) {
         const token = jwt.sign({ id: newUser._id, role: newUser.role, fullName: newUser.fullName }, process.env.JWT_SECRET)
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'none',
         });
 
@@ -174,7 +174,7 @@ async function LoginUser(req, res) {
             }, process.env.JWT_SECRET) 
         res.cookie('token', token, {
             httpOnly: true,
-            secure: false,
+            secure: true,
             sameSite: 'none',
         });
 
