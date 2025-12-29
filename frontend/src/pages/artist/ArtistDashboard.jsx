@@ -12,6 +12,7 @@ export default function ArtistDashboard() {
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
   const url = "https://musify-17w2.onrender.com"
+  const token = JSON.parse(localStorage.getItem("token"))
 
   const formatDateTime = (d) => {
     return new Date(d).toLocaleString([], {
@@ -25,7 +26,7 @@ export default function ArtistDashboard() {
 
   useEffect(() => {
     axios
-      .get(`${url}/api/auth/check-auth`, { withCredentials: true })
+      .get(`${url}/api/auth/check-auth`, { withCredentials: true , headers : {Authorization : token ? `Bearer ${token}`:undefined}})
       .then(res => {
         if (res.data.isLoggedIn) {
           setIsLoggedIn(true)
@@ -42,7 +43,7 @@ export default function ArtistDashboard() {
 
   const handleLogout = async () => {
     try {
-      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true })
+      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true , headers:{Authorization:token ? `Bearer ${token}`:undefined} })
       setIsLoggedIn(false)
       setUser(null)
       navigate('/login')
@@ -57,7 +58,7 @@ export default function ArtistDashboard() {
 
     
     axios
-      .get(`${url}/api/music/artist-music`, { withCredentials: true })
+      .get(`${url}/api/music/artist-music`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined} })
       .then((res) => {
         setMusics(
           res.data.musics.map((m) => ({
@@ -75,7 +76,7 @@ export default function ArtistDashboard() {
       .catch((err) => console.error('Error fetching musics:', err))
 
     axios
-      .get(`${url}/api/music/playlist/artist`, { withCredentials: true })
+      .get(`${url}/api/music/playlist/artist`, { withCredentials: true ,headers:{ Authorization : token ? `Bearer ${token}`:undefined}})
       .then((res) => {
         const playlistData = res.data.playlists || []
         setPlaylists(

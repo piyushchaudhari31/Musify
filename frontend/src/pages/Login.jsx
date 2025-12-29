@@ -25,20 +25,16 @@ function Login() {
     
     try {
       const response = await axios.post(`${url}/api/auth/login`, loginData, {withCredentials:true});
-      console.log(response.data);
-      
-      
-
       const role = response.data.user.role;
       if(role === "artist"){
         navigate("/artist/dashboard")
         toast.success("Login Successfully with artist")
+        localStorage.setItem("token",JSON.stringify(response.data.token))
       }
       else{
         navigate('/');
         toast.success("Login Successfully");
-        
-
+        localStorage.setItem("token",JSON.stringify(response.data.token))
       }
       
     } catch (error) {
@@ -49,7 +45,7 @@ function Login() {
 
   const handleGoogle = () => {
     window.location.href=`${url}/api/auth/google`
-  
+      
   };
 
   return (

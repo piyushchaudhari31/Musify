@@ -9,11 +9,15 @@ const Playlistcard = () => {
   const [musics, setMusics] = useState([]);
   const url = "https://musify-17w2.onrender.com"
   const navigate = useNavigate()
+  const token = JSON.parse(localStorage.getItem("token"))
   
   async function getPlaylist() {
     try {
       const response = await axios.get(`${url}/api/music/playlist/${id}`, {
         withCredentials: true,
+        headers:{
+          Authorization:token ? `Bearer ${token}`:undefined
+        }
       });
       const data = response.data.playlist;
       
@@ -24,7 +28,7 @@ const Playlistcard = () => {
         const musicDetails = await Promise.all(
           data.musics.map(async (musicId) => {
             const res = await axios.get(`${url}/api/music/get-detail/${musicId}`, {
-              withCredentials: true,
+              withCredentials: true,headers:{Authorization:token ? `Bearer ${token}` : undefined}
             });
             return res.data.music;
           })

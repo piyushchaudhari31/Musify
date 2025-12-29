@@ -8,10 +8,11 @@ const ArtistDetail = ()=>{
   const [artists, setArtists] = useState([]);
   const url = "https://musify-17w2.onrender.com";
   const navigate = useNavigate(); 
+  const token = JSON.parse(localStorage.getItem("token"))
 
   async function getArtistDetail() {
     try {
-      const response = await axios.get(`${url}/api/music/artist`, { withCredentials: true });
+      const response = await axios.get(`${url}/api/music/artist`, { withCredentials: true ,headers : {Authorization : token ? `Bearer ${token}`:undefined}});
       setArtists(response.data.user || []);
     } catch (err) { console.log("Error fetching artist"); }
   }

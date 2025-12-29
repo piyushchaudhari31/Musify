@@ -18,6 +18,7 @@ export default function UploadMusic() {
     const [ musicPreview, setMusicPreview ] = useState(null) 
     const [ musicDuration, setMusicDuration ] = useState(null)
     const audioRef = useRef(null)
+    const token = JSON.parse(localStorage.getItem("token"))
 
     const url = "https://musify-17w2.onrender.com"
 
@@ -74,7 +75,7 @@ export default function UploadMusic() {
         }
 
         toast.promise(
-            axios.post(`${url}/api/music/songs`, formData, {withCredentials: true}),
+            axios.post(`${url}/api/music/songs`, formData, {withCredentials: true , headers : {Authorization: token ? `Bearer ${token}`:undefined}}),
             {
                 loading:"Upload Song..",
                 success:"Song Upload Susccessfully",

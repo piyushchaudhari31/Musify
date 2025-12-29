@@ -7,6 +7,7 @@ export default function MusicPlayer() {
   const { id } = useParams()
   const navigate = useNavigate()
   const location = useLocation()
+  const token = JSON.parse(localStorage.getItem("token"))
 
   
   const musicList = location.state?.musics || []
@@ -94,7 +95,7 @@ export default function MusicPlayer() {
   
   useEffect(() => {
     axios
-      .get(`${url}/api/music/get-detail/${id}`, { withCredentials: true })
+      .get(`${url}/api/music/get-detail/${id}`, { withCredentials: true ,headers:{Authorization : token ? `Bearer ${token}` :undefined} })
       .then(res => {
         setTrack(res.data.music)
         setIsPlaying(false)

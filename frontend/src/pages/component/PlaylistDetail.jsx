@@ -7,12 +7,13 @@ export default function PlaylistDetail() {
 
   const navigate = useNavigate();
   const [playlists, setPlaylists] = useState([]);
+  const token = JSON.parse(localStorage.getItem("token"))
 
   const url = "https://musify-17w2.onrender.com";
 
   async function fetchPlaylists() {
     try {
-      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true })
+      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true , headers :{ Authorization :token? `Bearer ${token}` : undefined} })
       if (response.data.playlist) {
         setPlaylists(response.data.playlist.map(p => ({
           id: p._id,

@@ -10,10 +10,11 @@ const ArtistSong = () => {
   const [songs, setSongs] = useState([]);
   const url = "https://musify-17w2.onrender.com";
   const navigate = useNavigate();
+  const token = JSON.parse(localStorage.getItem("token"))
 
   async function getArtistDetail(){
     try {
-      const response = await axios.get(`${url}/api/music/artist/${id}`,{withCredentials:true});
+      const response = await axios.get(`${url}/api/music/artist/${id}`,{withCredentials:true , headers : {Authorization:token ? `Bearer ${token}`:undefined}});
       
       setArtist(response.data.artist || response.data);
       setSongs(response.data.musics || response.data.songs);

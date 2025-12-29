@@ -11,9 +11,10 @@ export default function Home({ socket }) {
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
   const url = 'https://musify-17w2.onrender.com'
+  const token = JSON.parse(localStorage.getItem("token"))
 
   useEffect(() => {
-    axios.get(`${url}/api/auth/check-auth`, { withCredentials: true })
+    axios.get(`${url}/api/auth/check-auth`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined}})
       .then(res => {
         setIsLoggedIn(res.data.isLoggedIn)
         if (res.data.user) setUser(res.data.user)
@@ -23,7 +24,7 @@ export default function Home({ socket }) {
 
   async function fetchPlaylists() {
     try {
-      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true })
+      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined} })
       if (response.data.playlist) {
         setPlaylists(response.data.playlist.map(p => ({
           id: p._id,
@@ -36,7 +37,7 @@ export default function Home({ socket }) {
   }
 
   async function fetchMusics() {
-    const response = await axios.get(`${url}/api/music/`, { withCredentials: true })
+    const response = await axios.get(`${url}/api/music/`, { withCredentials: true , headers :{Authorization : token ? `Bearer ${token}` : undefined} })
     if (response.data.musics) {
       setMusics(response.data.musics.map(m => ({
         id: m._id,
@@ -55,7 +56,7 @@ export default function Home({ socket }) {
 
   const handleAuthClick = async () => {
     if (isLoggedIn) {
-      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true })
+      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true ,headers: {Authorization :token ? `Bearer ${token}`:undefined} })
       setIsLoggedIn(false)
       setUser(null)
       navigate('/login')

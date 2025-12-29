@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Playlist = () => {
 
   const navigate = useNavigate()
+  const token = JSON.parse(localStorage.getItem("token"))
 
   const [playlistData, setPlaylistData] = useState({
     title: "All Music",
@@ -19,7 +20,7 @@ const Playlist = () => {
 
   useEffect(() => {
     axios
-      .get(`${url}/api/music/`, { withCredentials: true })
+      .get(`${url}/api/music/`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined}})
       .then((res) => {
         setPlaylistData({
           title: "All Music",
