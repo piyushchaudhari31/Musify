@@ -25,6 +25,8 @@ function Login() {
     
     try {
       const response = await axios.post(`${url}/api/auth/login`, loginData, {withCredentials:true});
+      console.log(response.data);
+      
       
 
       const role = response.data.user.role;

@@ -97,9 +97,11 @@ async function googleAuth(req, res) {
                 return res.redirect(`${url}/artist/dashboard`)
 
             }
-            return res.redirect(`${url}/`)
+            res.redirect(`${url}/`)
+            
             res.status(201).json({
                 message: "user Login successfully",
+                token,
                 user: {
                     id: isAlreadyExist._id,
                     email: isAlreadyExist.email,
@@ -181,6 +183,7 @@ async function LoginUser(req, res) {
 
         res.status(200).json({
             message: "Login Successfully",
+            token,
             user: {
                 Name: isEmail.fullName.firstName + " " + isEmail.fullName.lastName,
                 email: isEmail.email,

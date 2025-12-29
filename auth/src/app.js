@@ -9,7 +9,7 @@ const authRoutes = require('./routes/auth.routes');
 const musicRoutes = require('./routes/music.routes');
 
 const app = express();
-const url = "http://localhost:3000"
+const url = "https://musify-17w2.onrender.com"
 
 // Middleware setup
 app.use(passport.initialize());
