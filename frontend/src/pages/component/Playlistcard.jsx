@@ -7,7 +7,7 @@ const Playlistcard = () => {
   const { id } = useParams();
   const [playlist, setPlaylist] = useState(null);
   const [musics, setMusics] = useState([]);
-  const url = "http://localhost:3000"
+  const url = "https://musify-17w2.onrender.com"
   const navigate = useNavigate()
   
   async function getPlaylist() {

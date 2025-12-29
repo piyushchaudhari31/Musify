@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const ArtistDetail = ()=>{
 
   const [artists, setArtists] = useState([]);
-  const url = "http://localhost:3000";
+  const url = "https://musify-17w2.onrender.com";
   const navigate = useNavigate(); 
 
   async function getArtistDetail() {

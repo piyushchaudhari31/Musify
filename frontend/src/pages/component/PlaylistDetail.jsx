@@ -8,7 +8,7 @@ export default function PlaylistDetail() {
   const navigate = useNavigate();
   const [playlists, setPlaylists] = useState([]);
 
-  const url = "http://localhost:3000";
+  const url = "https://musify-17w2.onrender.com";
 
   async function fetchPlaylists() {
     try {

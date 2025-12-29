@@ -10,7 +10,7 @@ export default function Home({ socket }) {
   const [user, setUser] = useState(null)
   const [musics, setMusics] = useState([])
   const [playlists, setPlaylists] = useState([])
-  const url = 'http://localhost:3000'
+  const url = 'https://musify-17w2.onrender.com'
 
   useEffect(() => {
     axios.get(`${url}/api/auth/check-auth`, { withCredentials: true })

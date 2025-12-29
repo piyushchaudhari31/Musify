@@ -18,7 +18,7 @@ import ArtistSong from './pages/artist/ArtistSong'
 function App() {
 
   const [ socket, setSocket ] = useState(null)
-  const url = "http://localhost:3000"
+  const url = "https://musify-17w2.onrender.com"
 
   useEffect(() => {
 

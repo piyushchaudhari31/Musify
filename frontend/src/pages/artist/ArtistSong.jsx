@@ -8,7 +8,7 @@ const ArtistSong = () => {
   const { id } = useParams();             
   const [artist, setArtist] = useState(null);
   const [songs, setSongs] = useState([]);
-  const url = "http://localhost:3000";
+  const url = "https://musify-17w2.onrender.com";
   const navigate = useNavigate();
 
   async function getArtistDetail(){
