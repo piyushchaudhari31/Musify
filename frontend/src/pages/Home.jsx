@@ -24,7 +24,7 @@ export default function Home({ socket }) {
 
   async function fetchPlaylists() {
     try {
-      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined} })
+      const response = await axios.get(`${url}/api/music/playlist`, { withCredentials: true })
       if (response.data.playlist) {
         setPlaylists(response.data.playlist.map(p => ({
           id: p._id,
@@ -37,7 +37,7 @@ export default function Home({ socket }) {
   }
 
   async function fetchMusics() {
-    const response = await axios.get(`${url}/api/music/`, { withCredentials: true , headers :{Authorization : token ? `Bearer ${token}` : undefined} })
+    const response = await axios.get(`${url}/api/music/`, { withCredentials: true})
     if (response.data.musics) {
       setMusics(response.data.musics.map(m => ({
         id: m._id,
