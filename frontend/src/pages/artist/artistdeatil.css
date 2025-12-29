@@ -1,0 +1,86 @@
+body{
+  margin:0;
+  font-family:'Inter',sans-serif;
+  background:#111;
+  color:#fff;
+  overflow-x:hidden;
+}
+body::-webkit-scrollbar{display:none;}
+
+.artist-container{
+  padding:4rem 2rem;
+  width:100%;
+  box-sizing:border-box;
+}
+
+.artist-heading{
+  font-size:1.9rem;
+  margin-bottom:2rem;
+  font-weight:600;
+  text-align:center;
+}
+
+.artist-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+  gap:1.2rem;
+  width:100%;
+  justify-content:center;
+}
+
+
+.artist-card{
+  background:#1b1b1b;
+  padding:1.2rem;
+  border-radius:12px;
+  cursor:pointer;
+  text-align:center;
+  
+  transition:.3s ease;
+  overflow:hidden;
+  word-break:break-word;
+}
+.artist-card:hover{ transform:translateY(-6px); }
+
+
+.artist-name{
+  font-size:1.15rem;
+  font-weight:600;
+  height: 3vh;
+  margin-bottom:.4rem;
+}
+.artist-lastname{
+  font-size:.9rem;
+  color:#bbb;
+  margin-top:.2rem;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  display:block;
+}
+.artist-role{
+  font-size:.85rem;
+  color:#27e627;
+  margin-top:.3rem;
+}
+
+.back-btn{ display:none; }
+
+
+@media(max-width:780px){
+  .artist-container{ padding:3rem 1.2rem; }
+
+  .artist-grid{
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:1rem;
+  }
+  .artist-card{ padding:1rem; }
+  .artist-name{ font-size:1rem; }
+}
+
+@media(max-width:480px){
+  .artist-grid{
+    grid-template-columns:repeat(auto-fill,minmax(120px,1fr));
+  }
+  .artist-email{ font-size:.75rem; }
+}

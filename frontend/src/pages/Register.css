@@ -1,0 +1,214 @@
+/* ==== Base Page Layout ==== */
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  font-family: "Poppins", sans-serif;
+  padding: 20px; /* prevents overflow on small screens */
+  box-sizing: border-box;
+}
+
+/* ==== Card Container ==== */
+.register-card {
+  background: #fff;
+  padding: 40px 35px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 480px; /* prevents card from being too wide */
+  animation: fadeIn 0.8s ease-in-out;
+  box-sizing: border-box;
+  overflow: hidden; /* ensures nothing spills out */
+}
+
+.register-card h2 {
+  text-align: center;
+  color: #222;
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  margin-bottom: 25px;
+}
+
+/* ==== Form ==== */
+.register-form .form-group {
+  margin-bottom: 18px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap; /* allows wrapping on small screens */
+}
+
+.register-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.register-form input[type="text"],
+.register-form input[type="email"],
+.register-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.register-form input:focus {
+  border-color: #4b6cb7;
+  box-shadow: 0 0 0 3px rgba(75, 108, 183, 0.2);
+}
+
+/* ==== Radio Buttons ==== */
+.radio-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.radio-group label {
+  font-weight: 500;
+  color: #555;
+}
+
+.radio-group input {
+  margin-right: 5px;
+}
+
+/* ==== Buttons ==== */
+.register-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #4b6cb7, #182848);
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(75, 108, 183, 0.4);
+}
+
+/* ==== Divider ==== */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+  color: #999;
+  font-size: 14px;
+}
+
+.divider span {
+  background: #fff;
+  padding: 0 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.divider::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: #ddd;
+  z-index: 1;
+}
+
+/* ==== Google Button ==== */
+.google-btn {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ccc;
+  color: #444;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.google-btn img {
+  width: 22px;
+  height: 22px;
+}
+
+.google-btn:hover {
+  background-color: #f7f7f7;
+  border-color: #aaa;
+}
+.Password_length{
+    font-size: 12px;
+    display: flex;
+    color: red;
+}
+
+/* ==== Login Link ==== */
+.login-link {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-link a {
+  color: #4b6cb7;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* ==== Animation ==== */
+
+/* ==== Responsive Design ==== */
+@media (max-width: 600px) {
+  .register-card {
+    padding: 30px 20px;
+    width: 100%;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .register-btn,
+  .google-btn {
+    font-size: 15px;
+    padding: 10px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+}
