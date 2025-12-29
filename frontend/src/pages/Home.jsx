@@ -14,7 +14,7 @@ export default function Home({ socket }) {
   const token = JSON.parse(localStorage.getItem("token"))
 
   useEffect(() => {
-    axios.get(`${url}/api/auth/check-auth`, { withCredentials: true ,headers:{Authorization:token ? `Bearer ${token}`:undefined}})
+    axios.get(`${url}/api/auth/check-auth`, { withCredentials: true})
       .then(res => {
         setIsLoggedIn(res.data.isLoggedIn)
         if (res.data.user) setUser(res.data.user)
