@@ -45,7 +45,7 @@ async function userRegister(req, res) {
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
         });
 
 
@@ -90,7 +90,7 @@ async function googleAuth(req, res) {
             res.cookie('token', token, {
                 httpOnly: true,
                 secure: false,
-                sameSite: 'lax',
+                sameSite: 'none',
             });
 
             if(isAlreadyExist.role === "artist"){
@@ -126,7 +126,7 @@ async function googleAuth(req, res) {
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
         });
 
         if(newUser.role === "artist"){
@@ -175,7 +175,7 @@ async function LoginUser(req, res) {
         res.cookie('token', token, {
             httpOnly: true,
             secure: false,
-            sameSite: 'lax',
+            sameSite: 'none',
         });
 
 
