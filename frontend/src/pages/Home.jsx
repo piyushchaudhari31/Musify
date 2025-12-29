@@ -56,12 +56,14 @@ export default function Home({ socket }) {
 
   const handleAuthClick = async () => {
     if (isLoggedIn) {
-      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true ,headers: {Authorization :token ? `Bearer ${token}`:undefined} })
+      await axios.post(`${url}/api/auth/logout`, {}, { withCredentials: true})
       setIsLoggedIn(false)
       setUser(null)
       navigate('/login')
+      localStorage.clear()
       localStorage.removeItem("token")
     } else {
+      localStorage.clear()
       navigate('/login')
     }
   }

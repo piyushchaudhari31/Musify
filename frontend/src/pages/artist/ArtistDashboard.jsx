@@ -48,6 +48,7 @@ export default function ArtistDashboard() {
       setUser(null)
       navigate('/login')
       toast.success("Logged out Successfully")
+      localStorage.removeItem("token")
     } catch (err) {
       console.error('Logout failed:', err)
     }
