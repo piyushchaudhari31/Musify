@@ -60,6 +60,7 @@ export default function Home({ socket }) {
       setIsLoggedIn(false)
       setUser(null)
       navigate('/login')
+      localStorage.removeItem("token")
     } else {
       navigate('/login')
     }
