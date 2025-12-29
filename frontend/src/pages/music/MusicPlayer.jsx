@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react'
 import { useParams, useNavigate, useLocation } from 'react-router-dom'
-import '../music/musicplayer.css'
+import './musicplayer.css'
 import axios from 'axios'
 
 export default function MusicPlayer() {

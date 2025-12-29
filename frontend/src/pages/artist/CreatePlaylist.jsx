@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "../artist/createplaylist.css";
+import "./createplaylist.css";
 import axios from "axios";
 import toast from 'react-hot-toast'
 import { useNavigate } from "react-router-dom";

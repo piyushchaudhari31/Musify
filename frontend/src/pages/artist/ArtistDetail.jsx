@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import '../artist/artistdeatil.css'
+import './artistdeatil.css'
 import { useNavigate } from "react-router-dom";
 
 const ArtistDetail = ()=>{

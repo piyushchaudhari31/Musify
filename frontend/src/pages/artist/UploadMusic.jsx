@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import '../artist/uploadmusic.css'
+import './uploadmusic.css'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import toast from 'react-hot-toast'

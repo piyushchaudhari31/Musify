@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import '../artist/artistdashboard.css'
+import './artistdashboard.css'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 

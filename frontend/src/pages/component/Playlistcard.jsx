@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import '../component/playlistcard.css'; // ✅ import CSS file
+import './playlistcard.css'; // ✅ import CSS file
 
 const Playlistcard = () => {
   const { id } = useParams();
