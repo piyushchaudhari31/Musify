@@ -5,7 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  
+
   const navigate = useNavigate()
 
   const [loginData, setLoginData] = useState({
@@ -16,36 +16,49 @@ function Login() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLoginData({ ...loginData, [name]: value });
-    
+
   };
   const url = "https://musify-17w2.onrender.com"
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    try {
-      const response = await axios.post(`${url}/api/auth/login`, loginData, {withCredentials:true});
-      const role = response.data.user.role;
-      if(role === "artist"){
-        navigate("/artist/dashboard")
-        toast.success("Login Successfully with artist")
-        localStorage.setItem("token",JSON.stringify(response.data.token))
-      }
-      else{
-        navigate('/');
-        toast.success("Login Successfully");
-        localStorage.setItem("token",JSON.stringify(response.data.token))
-      }
-      
-    } catch (error) {
-      toast.error(error.response.data.message);
-    }
 
+    const loginPromise = axios.post(
+      `${url}/api/auth/login`,
+      loginData,
+      { withCredentials: true }
+    );
+
+    toast.promise(loginPromise, {
+      loading: "Logging in...",
+      success: (response) => {
+        const role = response.data.user.role;
+
+        localStorage.setItem("token", JSON.stringify(response.data.token));
+
+        if (role === "artist") {
+          navigate("/artist/dashboard");
+          return "Login Successfully as Artist 🎨";
+        } else {
+          navigate("/");
+          return "Login Successfully 🎉";
+        }
+      },
+      error: (error) => {
+        return error.response?.data?.message || "Login failed ❌";
+      },
+    });
+
+    try {
+      await loginPromise;
+    } catch (err) {
+      // already handled by toast.promise
+    }
   };
 
   const handleGoogle = () => {
-    window.location.href=`${url}/api/auth/google`
-      
+    window.location.href = `${url}/api/auth/google`
+
   };
 
   return (
